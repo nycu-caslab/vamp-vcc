@@ -18,6 +18,7 @@ __all__ = [
     "SimplifySettings",
     "SimplifyRoutine",
     "filter_pointcloud",
+    "filter_pointcloud_centervox",
     ]
 
 from pathlib import Path
@@ -43,6 +44,7 @@ from ._core import AORRTCSettings as AORRTCSettings
 from ._core import SimplifyRoutine as SimplifyRoutine
 from ._core import SimplifySettings as SimplifySettings
 from ._core import filter_pointcloud as filter_pointcloud
+from ._core import filter_pointcloud_centervox as filter_pointcloud_centervox
 
 robots = _core.robots()
 

@@ -19,9 +19,12 @@ def main(
     skip_rng_iterations: int = 0,          # Skip a number of RNG iterations
     display_object_names: bool = False,    # Display object names over geometry
     pointcloud: bool = False,              # Use pointcloud rather than primitive geometry
+    pointcloud_repr = "capt",              # Internal pointcloud representation, could be "capt" or "mvt"
     samples_per_object: int = 10000,       # If pointcloud, samples per object to use
-    filter_radius: float = 0.02,           # Filter radius for pointcloud filtering
-    filter_cull: bool = True,              # Cull pointcloud around robot by maximum distance
+    pointcloud_filter = "scdf",            # Pointcloud filtering approach, could be "scdf" (Space-filling Curve Distance-based Filtering) or "centervox" (Center-selective Voxel Filtering)
+    voxel_size: float = 0.031,             # centervox parameter: Voxel side length 
+    filter_radius: float = 0.02,           # scdf parameter: Filter radius 
+    filter_cull: bool = True,              # scdf parameter: Cull pointcloud around robot by maximum distance
     **kwargs,
     ):
 
@@ -53,25 +56,54 @@ Existing problems: {list(data['problems'].keys())}"""
     except StopIteration:
         raise RuntimeError(f"No problem in {problem} with index {index}!")
 
+    if pointcloud_repr not in ["capt", "mvt"]:
+        raise ValueError("pointcloud_repr must be one of: 'capt'(default), 'mvt'")
+    
+    if pointcloud_filter not in ["scdf", "centervox"]:
+        raise ValueError("pointcloud_filter must be one of: 'scdf'(default), 'centervox'")
+
     if pointcloud:
         r_min, r_max = vamp_module.min_max_radii()
-        (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud(
-            robot,
-            r_min,
-            r_max,
-            problem_data,
-            samples_per_object,
-            filter_radius,
-            filter_cull,
-            )
-
-        print(
+        if pointcloud_filter == "scdf":
+            (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud(
+                robot,
+                r_min,
+                r_max,
+                pointcloud_repr,
+                problem_data,
+                samples_per_object,
+                filter_radius,
+                filter_cull
+                )
+        else : 
+            (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud_centervox(
+                robot,
+                r_min,
+                r_max,
+                pointcloud_repr,
+                problem_data,
+                samples_per_object,
+                voxel_size
+                )
+            
+        if pointcloud_repr == "capt":
+            print(
             f"""
 Original Pointcloud size: {len(original_pc)}
 Filtered Pointcloud size: {len(filtered_pc)}
 
         Filtering Time: {filter_time * 1e-6:5.3f}ms
 CAPT Construction Time: {build_time * 1e-6:5.3f}ms
+            """
+            )
+        else: 
+            print(
+            f"""
+Original Pointcloud size: {len(original_pc)}
+Filtered Pointcloud size: {len(filtered_pc)}
+
+        Filtering Time: {filter_time * 1e-6:5.3f}ms
+ MVT Construction Time: {build_time * 1e-6:5.3f}ms
             """
             )
 

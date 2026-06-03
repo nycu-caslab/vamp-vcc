@@ -3,7 +3,7 @@ from numpy.typing import NDArray
 
 from typing import Dict, Union, List
 
-from . import Environment, filter_pointcloud
+from . import Environment, filter_pointcloud, filter_pointcloud_centervox
 from .constants import ROBOT_FIRST_JOINT_LOCATIONS, ROBOT_MAX_RADII, POINT_RADIUS
 from .transformations import translation_matrix, quaternion_matrix, concatenate_matrices
 
@@ -130,6 +130,7 @@ def problem_dict_to_pointcloud(
         robot: str,
         r_min: float,
         r_max: float,
+        pointcloud_repr: str,
         problem: Dict[str, List[Dict[str, Union[float, NDArray[np.float32]]]]],
         samples_per_object: int,
         filter_radius: float,
@@ -149,6 +150,9 @@ def problem_dict_to_pointcloud(
     else:
         print(f"Max extension radius for {robot} not found. Substituting {filter_cull_radius}m.")
 
+    if pointcloud_repr not in ["capt", "mvt"]:
+        raise ValueError("pc_repr must be one of: 'capt', 'mvt'")
+    
     bbox_lo = np.asarray(filter_origin) - filter_cull_radius
     bbox_hi = np.asarray(filter_origin) + filter_cull_radius
     filtered_pc, filter_time = filter_pointcloud(
@@ -162,6 +166,56 @@ def problem_dict_to_pointcloud(
     )
 
     env = Environment()
-    build_time = env.add_pointcloud(filtered_pc, r_min, r_max, POINT_RADIUS)
+
+    if pointcloud_repr == "capt":
+        build_time = env.add_pointcloud(filtered_pc, r_min, r_max, POINT_RADIUS)
+    else:
+        build_time = env.add_pointcloud_mvt(filtered_pc, r_max, bbox_lo, bbox_hi, POINT_RADIUS)
+
+    return env, original_pointcloud, filtered_pc, filter_time, build_time
+
+def problem_dict_to_pointcloud_centervox(
+        robot: str,
+        r_min: float,
+        r_max: float,
+        pointcloud_repr: str,
+        problem: Dict[str, List[Dict[str, Union[float, NDArray[np.float32]]]]],
+        samples_per_object: int,
+        voxel_size: float
+    ):
+    original_pointcloud = problem_to_pointcloud(problem, samples_per_object).tolist()
+
+    filter_origin = [0.0, 0.0, 0.0]
+    if robot in ROBOT_FIRST_JOINT_LOCATIONS.keys():
+        filter_origin = ROBOT_FIRST_JOINT_LOCATIONS[robot]
+    else:
+        print(f"Origin location for {robot} not found. Substituting {filter_origin}.")
+
+    filter_cull_radius = 1.4
+    if robot in ROBOT_MAX_RADII.keys():
+        filter_cull_radius = ROBOT_MAX_RADII[robot]
+    else:
+        print(f"Max extension radius for {robot} not found. Substituting {filter_cull_radius}m.")
+
+    if pointcloud_repr not in ["capt", "mvt"]:
+        raise ValueError("pc_repr must be one of: 'capt', 'mvt'")
+    
+    bbox_lo = np.asarray(filter_origin) - filter_cull_radius
+    bbox_hi = np.asarray(filter_origin) + filter_cull_radius
+    filtered_pc, filter_time = filter_pointcloud_centervox(
+        original_pointcloud,
+        voxel_size,
+        filter_cull_radius,
+        filter_origin,
+        bbox_lo,
+        bbox_hi
+    )
+
+    env = Environment()
+
+    if pointcloud_repr == "capt":
+        build_time = env.add_pointcloud(filtered_pc, r_min, r_max, POINT_RADIUS)
+    else:
+        build_time = env.add_pointcloud_mvt(filtered_pc, r_max, bbox_lo, bbox_hi, POINT_RADIUS)
 
     return env, original_pointcloud, filtered_pc, filter_time, build_time

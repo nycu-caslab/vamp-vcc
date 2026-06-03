@@ -21,9 +21,12 @@ def main(
     skip_rng_iterations: int = 0,          # Skip a number of RNG iterations
     print_failures: bool = False,          # Print out failures and invalid problems
     pointcloud: bool = False,              # Use pointcloud rather than primitive geometry
+    pointcloud_repr = "capt",              # Internal pointcloud representation, could be "capt" or "mvt"
     samples_per_object: int = 10000,       # If pointcloud, samples per object to use
-    filter_radius: float = 0.02,           # Filter radius for pointcloud filtering
-    filter_cull: bool = True,              # Cull pointcloud around robot by maximum distance
+    pointcloud_filter = "scdf",            # Pointcloud filtering approach, could be "scdf" (Space-filling Curve Distance-based Filtering) or "centervox" (Center-selective Voxel Filtering)
+    voxel_size: float = 0.031,             # centervox parameter: Voxel side length 
+    filter_radius: float = 0.02,           # scdf parameter: Filter radius 
+    filter_cull: bool = True,              # scdf parameter: Cull pointcloud around robot by maximum distance
     **kwargs,
     ):
 
@@ -46,6 +49,12 @@ def main(
                 raise RuntimeError(
                     f"Problem `{problem_name}` not available! Available problems: {problem_names}"
                     )
+            
+    if pointcloud_repr not in ["capt", "mvt"]:
+        raise ValueError("pointcloud_repr must be one of: 'capt'(default), 'mvt'")
+    
+    if pointcloud_filter not in ["scdf", "centervox"]:
+        raise ValueError("pointcloud_filter must be one of: 'scdf'(default), 'centervox'")
 
     (vamp_module, planner_func, plan_settings,
      simp_settings) = vamp.configure_robot_and_planner_with_kwargs(robot, planner, **kwargs)
@@ -76,21 +85,33 @@ def main(
 
             if pointcloud:
                 r_min, r_max = vamp_module.min_max_radii()
-                (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud(
-                    robot,
-                    r_min,
-                    r_max,
-                    data,
-                    samples_per_object,
-                    filter_radius,
-                    filter_cull,
-                    )
-
+                if pointcloud_filter == "scdf":
+                    (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud(
+                        robot,
+                        r_min,
+                        r_max,
+                        pointcloud_repr,
+                        data,
+                        samples_per_object,
+                        filter_radius,
+                        filter_cull
+                        )
+                else : 
+                    (env, original_pc, filtered_pc, filter_time, build_time) = vpc.problem_dict_to_pointcloud_centervox(
+                        robot,
+                        r_min,
+                        r_max,
+                        pointcloud_repr,
+                        data,
+                        samples_per_object,
+                        voxel_size
+                        )
+                
                 pointcloud_results = {
                     'original_pointcloud_size': len(original_pc),
                     'filtered_pointcloud_size': len(filtered_pc),
                     'filter_time': pd.Timedelta(nanoseconds = filter_time),
-                    'capt_build_time': pd.Timedelta(nanoseconds = build_time)
+                    f'{pointcloud_repr}_build_time': pd.Timedelta(nanoseconds = build_time)
                     }
             else:
                 env = vamp.problem_dict_to_vamp(data)
@@ -131,9 +152,9 @@ def main(
 
     # Pointcloud data
     if pointcloud:
-        df["total_build_and_plan_time"] = df["total_time"] + df["filter_time"] + df["capt_build_time"]
+        df["total_build_and_plan_time"] = df["total_time"] + df["filter_time"] + df[f"{pointcloud_repr}_build_time"]
         df["filter_time"] = df["filter_time"].dt.microseconds / 1e3
-        df["capt_build_time"] = df["capt_build_time"].dt.microseconds / 1e3
+        df[f"{pointcloud_repr}_build_time"] = df[f"{pointcloud_repr}_build_time"].dt.microseconds / 1e3
         df["total_build_and_plan_time"] = df["total_build_and_plan_time"].dt.microseconds / 1e3
 
     df["total_time"] = df["total_time"].dt.microseconds
@@ -157,7 +178,7 @@ def main(
     if pointcloud:
         pointcloud_stats = df[[
             "filter_time",
-            "capt_build_time",
+            f"{pointcloud_repr}_build_time",
             "total_build_and_plan_time",
             ]].describe(percentiles = [0.25, 0.5, 0.75, 0.95])
         pointcloud_stats.drop(index = ["count"], inplace = True)
@@ -187,17 +208,30 @@ def main(
         )
 
     if pointcloud:
-        print(
-            tabulate(
-                pointcloud_stats,
-                headers = [
-                    '  Filter Time (ms)',
-                    '    CAPT Build Time (ms)',
-                    'Total Time (ms)',
-                    ],
-                tablefmt = 'github'
+        if pointcloud_repr == "capt":
+            print(
+                tabulate(
+                    pointcloud_stats,
+                    headers = [
+                        '  Filter Time (ms)',
+                        '    CAPT Build Time (ms)',
+                        'Total Time (ms)',
+                        ],
+                    tablefmt = 'github'
+                    )
                 )
-            )
+        else:
+            print(
+                tabulate(
+                    pointcloud_stats,
+                    headers = [
+                        '  Filter Time (ms)',
+                        '     MVT Build Time (ms)',
+                        'Total Time (ms)',
+                        ],
+                    tablefmt = 'github'
+                    )
+                )
 
     print(
         f"Solved / Valid / Total # Problems: {valid_problems - failed_problems} / {valid_problems} / {total_problems}"
