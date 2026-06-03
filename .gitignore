@@ -22,3 +22,4 @@ src/vamp/_core/*.pyi
 /.mypy_cache/
 .DS_store
 vamp-web/
+/.venv
