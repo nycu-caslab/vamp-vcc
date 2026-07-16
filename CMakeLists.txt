@@ -140,8 +140,14 @@ endif()
 
 # C++ demos
 if(VAMP_BUILD_CPP_DEMO)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/OrbbecSDK/OrbbecSDKConfig.cmake)
   add_executable(vamp_rrtc_example scripts/cpp/rrtc_example.cc)
-  target_link_libraries(vamp_rrtc_example PRIVATE vamp_cpp)
+  target_link_libraries(vamp_rrtc_example PRIVATE vamp_cpp OrbbecSDK::OrbbecSDK)
+  
+  set_target_properties(vamp_rrtc_example PROPERTIES 
+    INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/OrbbecSDK/lib/${HOST_PLATFORM}"
+    BUILD_WITH_INSTALL_RPATH ON
+  )
   
   # Disable strict warnings for demos to maintain compatibility
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")

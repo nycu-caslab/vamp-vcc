@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="piper" path="../piper_description.urdf">
+	<link name="base_link">
+		<inertial>
+			<origin xyz="-0.00473641164191482 2.56829134630247E-05 0.041451518036016" rpy="0 0 0"></origin>
+			<mass value="1.02"></mass>
+			<inertia ixx="0.00267433" ixy="-0.00000073" ixz="-0.00017389" iyy="0.00282612" iyz="0.0000004" izz="0.00089624"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/base_link.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.067655"></sphere>
+			</geometry>
+			<origin xyz="-0.0010051926218393962 -0.00015236170209187148 0.03555986393313647" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.065112"></sphere>
+			</geometry>
+			<origin xyz="-0.018597192621839398 -0.0003543617020918715 0.03510886393313647" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link1">
+		<inertial>
+			<origin xyz="0.000121504734057468 0.000104632162460536 -0.00438597309559853" rpy="0 0 0"></origin>
+			<mass value="0.71"></mass>
+			<inertia ixx="0.00048916" ixy="-0.00000036" ixz="-0.00000224" iyy="0.00040472" iyz="-0.00000242" izz="0.00043982"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link1.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.05339"></sphere>
+			</geometry>
+			<origin xyz="-0.00010475099990880923 0.0008233658037691076 -0.0028637198821250052" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link2">
+		<inertial>
+			<origin xyz="0.198666145229743 -0.010926924140076 0.00142121714502687" rpy="0 0 0"></origin>
+			<mass value="1.17"></mass>
+			<inertia ixx="0.00116918" ixy="-0.00180037" ixz="0.00025146" iyy="0.06785384" iyz="-0.00000455" izz="0.06774489"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link2.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.044761"></sphere>
+			</geometry>
+			<origin xyz="0.045933377489506086 -0.007826424578274245 -0.013923094980895138" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.049598"></sphere>
+			</geometry>
+			<origin xyz="0.010660377489506101 -0.006147424578274245 0.03274590501910486" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.052727"></sphere>
+			</geometry>
+			<origin xyz="0.2782133774895061 -0.006802424578274246 -0.020952094980895137" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.040463"></sphere>
+			</geometry>
+			<origin xyz="0.003811377489506107 0.001148575421725754 -0.04077709498089514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.049647"></sphere>
+			</geometry>
+			<origin xyz="0.07521337748950609 -0.013801424578274246 0.0006119050191048623" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.049696"></sphere>
+			</geometry>
+			<origin xyz="0.1511873774895061 -0.027762424578274245 0.00018190501910486228" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.052531"></sphere>
+			</geometry>
+			<origin xyz="0.2252373774895061 -0.03658642457827424 0.0014569050191048623" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.052387"></sphere>
+			</geometry>
+			<origin xyz="0.2808023774895061 -0.005289424578274245 0.021236905019104864" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link3">
+		<inertial>
+			<origin xyz="-0.0202737662122021 -0.133914995944595 -0.000458682652737356" rpy="0 0 0"></origin>
+			<mass value="0.5"></mass>
+			<inertia ixx="0.01361711" ixy="0.00165794" ixz="-0.00000048" iyy="0.00045024" iyz="-0.00000045" izz="0.01380322"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link3.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.047669"></sphere>
+			</geometry>
+			<origin xyz="-0.022085146557518694 -0.18111262136294773 -0.00043495972315259093" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.044069"></sphere>
+			</geometry>
+			<origin xyz="-0.022158146557518694 -0.10366962136294773 0.002655040276847409" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.029725"></sphere>
+			</geometry>
+			<origin xyz="-0.0048991465575186945 0.011380378637052269 0.03464004027684741" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.033015"></sphere>
+			</geometry>
+			<origin xyz="-0.019587146557518694 -0.033671621362947726 -0.02594595972315259" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.051266"></sphere>
+			</geometry>
+			<origin xyz="-0.016212146557518695 -0.03853662136294773 0.007727040276847409" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.029374"></sphere>
+			</geometry>
+			<origin xyz="-0.004567146557518694 0.009262378637052274 -0.03540095972315259" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.027931"></sphere>
+			</geometry>
+			<origin xyz="0.013703853442481307 -0.0051546213629477255 -0.03522395972315259" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.022755"></sphere>
+			</geometry>
+			<origin xyz="0.023425853442481305 0.0010513786370522776 0.03400404027684741" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link4">
+		<inertial>
+			<origin xyz="-9.66635791618542E-05 0.000876064475651083 -0.00496880904640868" rpy="0 0 0"></origin>
+			<mass value="0.38"></mass>
+			<inertia ixx="0.00018501" ixy="0.00000054" ixz="0.00000120" iyy="0.00018965" iyz="-0.00000841" izz="0.00015484"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link4.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.048647"></sphere>
+			</geometry>
+			<origin xyz="-0.0001050317547666099 0.0036279603519317307 -0.006723930885434583" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link5">
+		<inertial>
+			<origin xyz="-4.10554118924211E-05 -0.0566486692356075 -0.0037205791677906" rpy="0 0 0"></origin>
+			<mass value="0.383"></mass>
+			<inertia ixx="0.00166169" ixy="0.00000006" ixz="-0.00000007" iyy="0.00018510" iyz="0.00001026" izz="0.00164321"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link5.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.047852"></sphere>
+			</geometry>
+			<origin xyz="0.0009093506236111945 -0.05643129786807673 -0.0023857836543263976" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.025826"></sphere>
+			</geometry>
+			<origin xyz="-0.013747649376388806 0.0011437021319232674 -0.028057783654326398" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.022055"></sphere>
+			</geometry>
+			<origin xyz="0.009722350623611195 0.011556702131923266 -0.0285267836543264" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.035069"></sphere>
+			</geometry>
+			<origin xyz="-0.008824649376388806 -0.04083929786807673 -0.008673783654326398" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.022214"></sphere>
+			</geometry>
+			<origin xyz="0.017209350623611196 -0.01579329786807673 -0.0254187836543264" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link6">
+		<inertial>
+			<origin xyz="-8.82590762930069E-05 9.0598378529832E-06 -0.002" rpy="0 0 0"></origin>
+			<mass value="0.00699089613564366"></mass>
+			<inertia ixx="5.73015540542155E-07" ixy="-1.98305403089247E-22" ixz="-7.2791893904596E-23" iyy="5.73015540542155E-07" iyz="-3.4146026640245E-24" izz="1.06738869138926E-06"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link6.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.009823"></sphere>
+			</geometry>
+			<origin xyz="-0.005950885904192925 0.01293905990600586 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.010096"></sphere>
+			</geometry>
+			<origin xyz="0.005538114095807075 0.00755305990600586 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.009773"></sphere>
+			</geometry>
+			<origin xyz="0.014169114095807076 -0.0015549400939941407 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.010057"></sphere>
+			</geometry>
+			<origin xyz="0.0033631140958070753 -0.010150940093994141 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.009641"></sphere>
+			</geometry>
+			<origin xyz="-0.009950885904192925 0.0013050599060058594 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.008575"></sphere>
+			</geometry>
+			<origin xyz="-0.009938885904192925 -0.01083894009399414 -0.0020000000949948957" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="gripper_base">
+		<inertial>
+			<origin xyz="-0.000183807162235591 8.05033155577911E-05 0.0321436689908876" rpy="0 0 0"></origin>
+			<mass value="0.45"></mass>
+			<inertia ixx="0.00092934" ixy="0.00000034" ixz="-0.00000738" iyy="0.00071447" iyz="0.00000005" izz="0.00039442"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/gripper_base.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="0.041876"></sphere>
+			</geometry>
+			<origin xyz="0.00022358367493029597 -0.00013528641946795923 0.027249964980507732" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.023708"></sphere>
+			</geometry>
+			<origin xyz="0.000491583674930296 0.05385471358053204 0.053298964980507735" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.026584"></sphere>
+			</geometry>
+			<origin xyz="0.0004965836749302958 0.02571271358053204 0.04602596498050773" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.038611"></sphere>
+			</geometry>
+			<origin xyz="0.002270583674930296 0.0019027135805320407 0.031532964980507734" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.027593"></sphere>
+			</geometry>
+			<origin xyz="-9.441632506970374e-05 -0.02408828641946796 0.04569996498050773" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.023246"></sphere>
+			</geometry>
+			<origin xyz="-0.00041541632506970384 -0.05405228641946796 0.053243964980507735" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.030552"></sphere>
+			</geometry>
+			<origin xyz="-0.012279416325069705 -0.002579286419467959 0.037285964980507735" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.033104"></sphere>
+			</geometry>
+			<origin xyz="-0.012510416325069704 -0.00014828641946795922 0.03664196498050773" rpy="0 0 0"></origin>
+		</collision>
+	</link>
+	<link name="link7">
+		<inertial>
+			<origin xyz="0.00065123185041968 -0.0491929869131989 0.00972258769184025" rpy="0 0 0"></origin>
+			<mass value="0.025"></mass>
+			<inertia ixx="0.00007371" ixy="-0.00000113" ixz="0.00000021" iyy="-0.00000113" iyz="-0.00001372" izz="0.0000747"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link7.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<!-- <collision>
+			<geometry>
+				<sphere radius="0.019556"></sphere>
+			</geometry>
+			<origin xyz="0.014452131982951541 -0.06210023860483421 0.012125795449446515" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.019305"></sphere>
+			</geometry>
+			<origin xyz="-0.003972868017048458 -0.06727223860483421 0.016229795449446513" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.020304"></sphere>
+			</geometry>
+			<origin xyz="-0.012912868017048459 -0.061657238604834214 0.011189795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.017332"></sphere>
+			</geometry>
+			<origin xyz="0.007681131982951541 -0.04224223860483421 0.006227795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.017085"></sphere>
+			</geometry>
+			<origin xyz="-0.012441868017048458 -0.032017238604834214 0.006566795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.015698"></sphere>
+			</geometry>
+			<origin xyz="0.009379131982951542 -0.016125238604834214 0.004477795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.016555"></sphere>
+			</geometry>
+			<origin xyz="-0.0016928680170484585 -0.008684238604834214 0.003782795449446515" rpy="0 0 0"></origin>
+		</collision> -->
+	</link>
+	<link name="link8">
+		<inertial>
+			<origin xyz="0.000651231850419722 -0.0491929869131991 0.00972258769184024" rpy="0 0 0"></origin>
+			<mass value="0.025"></mass>
+			<inertia ixx="0.00007371" ixy="-0.00000113" ixz="0.00000021" iyy="-0.00000113" iyz="-0.00001372" izz="0.0000747"></inertia>
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<geometry>
+				<mesh filename="package://piper_meshes/link8.STL"></mesh>
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"></color>
+			</material>
+		</visual>
+		<!-- <collision>
+			<geometry>
+				<sphere radius="0.019556"></sphere>
+			</geometry>
+			<origin xyz="0.014452131982951541 -0.06210023860483421 0.012125795449446515" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.019305"></sphere>
+			</geometry>
+			<origin xyz="-0.003972868017048458 -0.06727223860483421 0.016229795449446513" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.020304"></sphere>
+			</geometry>
+			<origin xyz="-0.012912868017048459 -0.061657238604834214 0.011189795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.017332"></sphere>
+			</geometry>
+			<origin xyz="0.007681131982951541 -0.04224223860483421 0.006227795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.017085"></sphere>
+			</geometry>
+			<origin xyz="-0.012441868017048458 -0.032017238604834214 0.006566795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.015698"></sphere>
+			</geometry>
+			<origin xyz="0.009379131982951542 -0.016125238604834214 0.004477795449446514" rpy="0 0 0"></origin>
+		</collision>
+		<collision>
+			<geometry>
+				<sphere radius="0.016555"></sphere>
+			</geometry>
+			<origin xyz="-0.0016928680170484585 -0.008684238604834214 0.003782795449446515" rpy="0 0 0"></origin>
+		</collision> -->
+	</link>
+	<joint name="joint1" type="revolute">
+		<origin xyz="0 0 0.123" rpy="0 0 0"></origin>
+		<parent link="base_link"></parent>
+		<child link="link1"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="-2.618" upper="2.168" effort="100" velocity="5"></limit>
+	</joint>
+	<joint name="joint2" type="revolute">
+		<origin xyz="0 0 0" rpy="1.5708 -0.1359 -3.1416"></origin>
+		<parent link="link1"></parent>
+		<child link="link2"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="0" upper="3.14" effort="100" velocity="5"></limit>
+	</joint>
+	<joint name="joint3" type="revolute">
+		<origin xyz="0.28503 0 0" rpy="0 0 -1.7939"></origin>
+		<parent link="link2"></parent>
+		<child link="link3"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="-2.967" upper="0" effort="100" velocity="5"></limit>
+	</joint>
+	<joint name="joint4" type="revolute">
+		<origin xyz="-0.021984 -0.25075 0" rpy="1.5708 0 0"></origin>
+		<parent link="link3"></parent>
+		<child link="link4"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="-1.745" upper="1.745" effort="100" velocity="5"></limit>
+	</joint>
+	<joint name="joint5" type="revolute">
+		<origin xyz="0 0 0" rpy="-1.5708 0 0"></origin>
+		<parent link="link4"></parent>
+		<child link="link5"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="-1.22" upper="1.22" effort="100" velocity="5"></limit>
+	</joint>
+	<joint name="joint6" type="revolute">
+		<origin xyz="8.8259E-05 -0.091 0" rpy="1.5708 0 0"></origin>
+		<parent link="link5"></parent>
+		<child link="link6"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="-2.0944" upper="2.0944" effort="100" velocity="3"></limit>
+	</joint>
+	<joint name="joint6_to_gripper_base" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"></origin>
+		<parent link="link6"></parent>
+		<child link="gripper_base"></child>
+	</joint>
+	<joint name="joint7" type="fixed">
+		<origin xyz="0 0 0.1358" rpy="1.5708 0 0"></origin>
+		<parent link="gripper_base"></parent>
+		<child link="link7"></child>
+		<axis xyz="0 0 1"></axis>
+		<limit lower="0" upper="0.035" effort="10" velocity="1"></limit>
+	</joint>
+	<joint name="joint8" type="fixed">
+		<origin xyz="0 0 0.1358" rpy="1.5708 0 -3.1416"></origin>
+		<parent link="gripper_base"></parent>
+		<child link="link8"></child>
+		<axis xyz="0 0 -1"></axis>
+		<limit lower="-0.035" upper="0" effort="10" velocity="1"></limit>
+	</joint>
+</robot>
